@@ -1,0 +1,39 @@
+services:
+  estab:
+    image: estab
+    hostname: estab
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    volumes:
+      - estab-data:/var/www/html/kats/4fdata
+      - estab-config:/var/www/html/kats/4fcfg
+    environment:
+      - DB_PASSWORD_FILE=/run/secrets/db_password
+    secrets:
+      - db_password
+
+  mysql:
+    image: mariadb:11.3
+    hostname: db
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password
+
+  adminer:
+    image: adminer:4.8.1
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+
+secrets:
+  db-password:
+    file: db_password.txt
+
+volumes:
+  estab-data:
+  estab-config:
