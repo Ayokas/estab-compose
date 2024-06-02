@@ -1,6 +1,6 @@
 services:
   estab:
-    image: estab
+    image: darthayokas/estab:0.1
     hostname: estab
     ports:
       - "80:80"
@@ -31,7 +31,7 @@ services:
       - 8080:8080
 
 secrets:
-  db-password:
+  db_password:
     file: db_password.txt
 
 volumes:
