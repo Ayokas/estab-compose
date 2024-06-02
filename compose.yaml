@@ -1,6 +1,6 @@
 services:
   estab:
-    image: darthayokas/estab:0.1
+    image: darthayokas/estab:0.2
     hostname: estab
     ports:
       - "80:80"
